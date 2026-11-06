@@ -75,12 +75,7 @@ const mhr = document.getElementById('mhr');
 const mhrOpt = document.getElementById('mhr-opt');
 const lvl = form.querySelector('[name="Current level"]');
 function mhrRule() {
-  const travel = ['AAA', 'AA', 'A', 'B'].includes(lvl.value);
-  const picks = [...form.querySelectorAll('input[type=checkbox][name="Interested in"]:checked')].map(c => c.value);
-  const hsOnly = picks.length > 0 && picks.every(v => v === 'Heart Squad');
-  const need = travel && !hsOnly;
-  mhr.required = need;
-  mhrOpt.textContent = need ? 'required for B–AAA players' : (hsOnly ? 'optional for Heart Squad' : 'required for B–AAA players');
+  mhr.required = false;
   mhr.setCustomValidity('');
   if (mhr.value.trim() && !/myhockeyrankings\.com/i.test(mhr.value)) mhr.setCustomValidity('Please paste your team link from myhockeyrankings.com');
 }
@@ -95,7 +90,7 @@ form.addEventListener('submit', async (e) => {
   mhrRule();
   if (!form.checkValidity()) {
     const bad = form.querySelector(':invalid');
-    status.textContent = bad === mhr ? (mhr.value.trim() ? 'Please paste your team link from myhockeyrankings.com.' : 'B–AAA players: please add your MyHockeyRankings team link.') : 'Please fill in the required fields.';
+    status.textContent = bad === mhr ? 'Please paste your team link from myhockeyrankings.com, or leave it blank.' : 'Please fill in the required fields.';
     status.classList.add('err');
     if (bad) bad.focus();
     return;
