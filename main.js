@@ -83,24 +83,14 @@ form.addEventListener('submit', async (e) => {
     if (bad) bad.focus();
     return;
   }
-  const fd = new FormData(form);
-  const picks = fd.getAll('Interested in');
-  fd.delete('Interested in');
-  fd.set('Interested in', picks.length ? picks.join(', ') : 'Not specified');
+  const boxes = [...form.querySelectorAll('input[type=checkbox][name="Interested in"]')];
+  const picks = boxes.filter(c => c.checked).map(c => c.value);
+  let h = form.querySelector('input[type=hidden][name="Interested in"]');
+  if (!h) { h = document.createElement('input'); h.type = 'hidden'; h.name = 'Interested in'; form.appendChild(h); }
+  h.value = picks.length ? picks.join(', ') : 'Not specified';
+  boxes.forEach(c => { c.disabled = true; });
   btn.disabled = true; btn.textContent = 'Sending...';
-  try {
-    const r = await fetch('https://formsubmit.co/ajax/play@wickedhearthockey.com', { method: 'POST', headers: { Accept: 'application/json' }, body: fd });
-    const j = await r.json().catch(() => ({}));
-    if (!r.ok || j.success === 'false' || j.success === false) throw new Error(j.message || 'Send failed');
-    form.reset();
-    form.classList.add('sent');
-    status.textContent = "Thanks. Your interest form is in, and we'll follow up by email.";
-    status.classList.add('ok');
-    btn.textContent = 'Submitted';
-  } catch (err) {
-    status.innerHTML = 'Something went wrong. Please email us at <a href="mailto:play@wickedhearthockey.com">play@wickedhearthockey.com</a>.';
-    status.classList.add('err');
-    btn.disabled = false; btn.textContent = 'Submit interest form';
-  }
+  addEventListener('pageshow', () => { boxes.forEach(c => { c.disabled = false; }); btn.disabled = false; btn.textContent = 'Submit interest form'; }, { once: true });
+  form.submit();
 });
-if (location.hash === '#thanks') { status.textContent = "Thanks. Your interest form is in, and we'll follow up by email."; status.classList.add('ok'); }
+if (location.hash === '#thanks') { form.classList.add('sent'); btn.textContent = 'Submitted'; btn.disabled = true; status.textContent = "Thanks. Your interest form is in, and we'll follow up by email."; status.classList.add('ok'); }
