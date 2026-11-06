@@ -91,6 +91,20 @@ form.addEventListener('submit', async (e) => {
   boxes.forEach(c => { c.disabled = true; });
   btn.disabled = true; btn.textContent = 'Sending...';
   addEventListener('pageshow', () => { boxes.forEach(c => { c.disabled = false; }); btn.disabled = false; btn.textContent = 'Submit interest form'; }, { once: true });
-  form.submit();
+  try {
+    const fd = new FormData(form);
+    boxes.forEach(c => fd.delete('Interested in'));
+    fd.set('Interested in', h.value);
+    const r = await fetch(form.action, { method: 'POST', body: fd, headers: { Accept: 'application/json' } });
+    const j = await r.json().catch(() => ({}));
+    if (!r.ok || j.success === false) throw new Error(j.message || 'send failed');
+    form.reset();
+    form.classList.add('sent'); btn.textContent = 'Submitted';
+    status.textContent = "Thanks. Your interest form is in, and we'll follow up by email.";
+    status.classList.add('ok');
+    status.scrollIntoView({ behavior: 'smooth', block: 'center' });
+  } catch (err) {
+    form.submit();
+  }
 });
 if (location.hash === '#thanks') { form.classList.add('sent'); btn.textContent = 'Submitted'; btn.disabled = true; status.textContent = "Thanks. Your interest form is in, and we'll follow up by email."; status.classList.add('ok'); }
