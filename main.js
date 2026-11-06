@@ -11,7 +11,9 @@ const groups = [
   ['.values', '.values-head h2, .values-head p'],
   ['.programs', '.programs-title, .programs-lede, .fit-btn'],
   ['.faq', '.band h2, .band h3, .band p'],
-  ['.cta', '.cta-title span, .cta-row .btn, .or, .cta-note'],
+  ['.status', '.status-tag, .status-copy, .status-link'],
+  ['.hs', '.hs-kicker, .hs-title, .hs-lede, .hs-card, .hs-ice'],
+  ['.join', '.join-title span, .join-intro p, .join-points li'],
   ['.foot', '.foot-logo, .foot-menu nav a, .foot-blocks p'],
 ];
 const io = new IntersectionObserver((es) => {
@@ -52,8 +54,8 @@ const fitText = {
 };
 const table = document.querySelector('.lineup');
 const out = document.querySelector('.fit-result');
-const reg = document.getElementById('cta-register');
-const labels = { ba: 'B or A level', aaa: 'AA or AAA level', girls: "girls' team", heart: 'Heart Squad' };
+const labels = { ba: ['B', 'A'], aaa: ['AA', 'AAA'], girls: [], heart: ['Heart Squad'] };
+const form = document.getElementById('interest-form');
 document.querySelectorAll('.fit-btn').forEach(b => b.addEventListener('click', () => {
   const on = b.getAttribute('aria-pressed') !== 'true';
   document.querySelectorAll('.fit-btn').forEach(x => x.setAttribute('aria-pressed', 'false'));
@@ -63,7 +65,42 @@ document.querySelectorAll('.fit-btn').forEach(b => b.addEventListener('click', (
   b.setAttribute('aria-pressed', 'true');
   table.classList.add('filtering');
   table.querySelectorAll('[data-fits]').forEach(tr => tr.classList.toggle('match', tr.dataset.fits.split(' ').includes(k)));
-  out.innerHTML = fitText[k] + ' <a href="#join">Ask about a roster spot</a>';
-  const body = encodeURIComponent(`Hi, I'm interested in a roster spot for my player.\n\nLooking at: ${labels[k]}\nPlayer birth year:\nAnything we should know:`);
-  reg.href = `mailto:play@wickedhearthockey.com?subject=Roster%20interest&body=${body}`;
+  out.innerHTML = fitText[k] + ' <a href="#join">Fill out the interest form</a>';
+  form.querySelectorAll('input[name="Interested in"]').forEach(c => { c.checked = labels[k].includes(c.value); });
+  if (k === 'girls') { const g = form.querySelector('input[name="Team type"][value="Girls"]'); if (g) g.checked = true; }
 }));
+
+// interest form
+const status = form.querySelector('.form-status');
+const btn = form.querySelector('button[type="submit"]');
+form.addEventListener('submit', async (e) => {
+  e.preventDefault();
+  status.className = 'form-status';
+  if (!form.checkValidity()) {
+    const bad = form.querySelector(':invalid');
+    status.textContent = 'Please fill in the required fields.';
+    status.classList.add('err');
+    if (bad) bad.focus();
+    return;
+  }
+  const fd = new FormData(form);
+  const picks = fd.getAll('Interested in');
+  fd.delete('Interested in');
+  fd.set('Interested in', picks.length ? picks.join(', ') : 'Not specified');
+  btn.disabled = true; btn.textContent = 'Sending...';
+  try {
+    const r = await fetch('https://formsubmit.co/ajax/play@wickedhearthockey.com', { method: 'POST', headers: { Accept: 'application/json' }, body: fd });
+    const j = await r.json().catch(() => ({}));
+    if (!r.ok || j.success === 'false' || j.success === false) throw new Error(j.message || 'Send failed');
+    form.reset();
+    form.classList.add('sent');
+    status.textContent = "Thanks. Your interest form is in, and we'll follow up by email.";
+    status.classList.add('ok');
+    btn.textContent = 'Submitted';
+  } catch (err) {
+    status.innerHTML = 'Something went wrong. Please email us at <a href="mailto:play@wickedhearthockey.com">play@wickedhearthockey.com</a>.';
+    status.classList.add('err');
+    btn.disabled = false; btn.textContent = 'Submit interest form';
+  }
+});
+if (location.hash === '#thanks') { status.textContent = "Thanks. Your interest form is in, and we'll follow up by email."; status.classList.add('ok'); }
