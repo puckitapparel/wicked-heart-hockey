@@ -101,7 +101,7 @@ mark{color:#000;padding:0 .12em;-webkit-box-decoration-break:clone;box-decoratio
 .lineup{margin-top:40px}
 .lineup-head{font-family:var(--display);font-weight:400;text-transform:uppercase;font-size:clamp(26px,2.4vw,36px);margin:56px 0 18px}
 .lineup-head:first-child{margin-top:12px}
-.levels{list-style:none;margin:0;padding:0;display:grid;grid-template-columns:repeat(4,1fr);gap:14px}
+.levels{list-style:none;margin:0;padding:0;display:grid;grid-template-columns:repeat(5,1fr);gap:14px}
 .level,.squad{background:#050506;color:#fbf8ff;transition:opacity .25s,transform .25s,box-shadow .25s}
 .level{padding:26px 24px 24px;display:flex;flex-direction:column;justify-content:space-between;min-height:220px}
 .lv{font-family:var(--display);font-size:clamp(72px,7vw,112px);line-height:1;color:var(--cyan)}
@@ -193,6 +193,7 @@ mark{color:#000;padding:0 .12em;-webkit-box-decoration-break:clone;box-decoratio
   .programs-title{font-size:15vw}
   .levels{grid-template-columns:1fr 1fr;gap:10px}
   .level{min-height:170px;padding:20px 18px}
+  .level:last-child{grid-column:1/-1;min-height:130px}
   .lv{font-size:64px}
   .lv-meta{font-size:13px}
   .squad{grid-template-columns:1fr;gap:14px;padding:26px 22px;margin-top:36px}

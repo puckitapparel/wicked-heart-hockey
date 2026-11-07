@@ -47,14 +47,13 @@ deal();
 
 // find your fit
 const fitText = {
-  ba: 'Our B and A tournament teams are built for players who compete and want to keep climbing.',
-  aaa: 'Our AA and AAA tournament teams are built for players ready for the highest level of tournament hockey.',
-  girls: "Girls' tournament teams run from B through AAA.",
+  youth: 'Our 10U and 12U tournament teams are built for players who compete and want to keep climbing.',
+  girls: "Our girls' tournament teams are forming at 12U, 14U and 16U.",
   heart: 'Heart Squad is our team for neurodivergent athletes and athletes with special needs, with coaching and games built around how they play best.',
 };
 const table = document.querySelector('.lineup');
 const out = document.querySelector('.fit-result');
-const labels = { ba: ['B', 'A'], aaa: ['AA', 'AAA'], girls: [], heart: ['Heart Squad'] };
+const labels = { youth: ['10U team', '12U team'], girls: ['Girls 12U', 'Girls 14U', 'Girls 16U'], heart: ['Heart Squad'] };
 const form = document.getElementById('interest-form');
 document.querySelectorAll('.fit-btn').forEach(b => b.addEventListener('click', () => {
   const on = b.getAttribute('aria-pressed') !== 'true';
