@@ -55,6 +55,8 @@ const table = document.querySelector('.lineup');
 const out = document.querySelector('.fit-result');
 const labels = { youth: ['10U team', '12U team'], girls: ['Girls 12U', 'Girls 14U', 'Girls 16U'], heart: ['Heart Squad'] };
 const form = document.getElementById('interest-form');
+// Google Sheet tracker (Apps Script web app). Leave blank to skip.
+const TRACKER_URL = '';
 document.querySelectorAll('.fit-btn').forEach(b => b.addEventListener('click', () => {
   const on = b.getAttribute('aria-pressed') !== 'true';
   document.querySelectorAll('.fit-btn').forEach(x => x.setAttribute('aria-pressed', 'false'));
@@ -106,6 +108,12 @@ form.addEventListener('submit', async (e) => {
     const fd = new FormData(form);
     boxes.forEach(c => fd.delete('Interested in'));
     fd.set('Interested in', h.value);
+    if (TRACKER_URL) {
+      const tp = new URLSearchParams();
+      for (const [k, v] of fd.entries()) if (k !== 'access_key' && typeof v === 'string') tp.set(k, v);
+      if (!fd.has('Email updates')) tp.set('Email updates', 'No');
+      fetch(TRACKER_URL, { method: 'POST', mode: 'no-cors', body: tp, keepalive: true }).catch(() => {});
+    }
     const r = await fetch(form.action, { method: 'POST', body: fd, headers: { Accept: 'application/json' } });
     const j = await r.json().catch(() => ({}));
     if (!r.ok || j.success === false) throw new Error(j.message || 'send failed');
