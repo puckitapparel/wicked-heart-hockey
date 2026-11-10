@@ -56,7 +56,7 @@ const out = document.querySelector('.fit-result');
 const labels = { youth: ['10U team', '12U team'], girls: ['Girls 12U', 'Girls 14U', 'Girls 16U'], heart: ['Heart Squad'] };
 const form = document.getElementById('interest-form');
 // Google Sheet tracker (Apps Script web app). Leave blank to skip.
-const TRACKER_URL = '';
+const TRACKER_URL = 'https://script.google.com/macros/s/AKfycbyCmRARIfIqUL0Z_7hHulyCBwZpuKzhCICd0N3XLC61cIwwKAWIPL5g93rDye8cFOBY/exec';
 document.querySelectorAll('.fit-btn').forEach(b => b.addEventListener('click', () => {
   const on = b.getAttribute('aria-pressed') !== 'true';
   document.querySelectorAll('.fit-btn').forEach(x => x.setAttribute('aria-pressed', 'false'));
