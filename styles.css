@@ -317,3 +317,22 @@ mark{color:#000;padding:0 .12em;-webkit-box-decoration-break:clone;box-decoratio
   .iform .btn{width:100%}
 }
 #season{scroll-margin-top:90px}
+
+/* shop */
+.shop{background:var(--bg);padding:130px var(--m) 140px;border-top:10px solid var(--cyan)}
+.shop-kicker{display:inline-block;background:var(--cyan);color:#000;font-weight:700;font-size:16px;padding:6px 12px;text-transform:uppercase;letter-spacing:.04em}
+.shop-title{font-size:clamp(64px,10vw,170px);color:var(--cyan);margin-top:20px}
+.shop-lede{font-size:clamp(20px,1.9vw,27px);line-height:1.35;max-width:52ch;margin-top:24px}
+.shop-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:14px;margin-top:56px}
+.shop-card{display:flex;flex-direction:column;background:var(--raise);text-decoration:none;border-top:6px solid var(--vio);transition:transform .18s var(--ease)}
+.shop-card:hover{transform:translateY(-4px)}
+.shop-card img{width:100%;aspect-ratio:1/1;object-fit:cover;background:#fff}
+.shop-card h3{font-size:clamp(24px,2vw,32px);line-height:1;padding:20px 20px 8px}
+.shop-card p{font-size:16px;color:var(--soft);padding:0 20px;flex:1}
+.shop-price{display:block;font-weight:700;font-size:19px;color:var(--cyan);padding:14px 20px 22px}
+.shop-card-all{background:var(--cyan);color:#000;border-top-color:var(--cyan);justify-content:flex-end;min-height:280px}
+.shop-card-all h3{font-size:clamp(34px,3vw,52px);padding:28px 24px 10px}
+.shop-card-all p{color:#000;flex:0;padding:0 24px}
+.shop-card-all .shop-price{color:#000;padding:16px 24px 26px;text-decoration:underline}
+@media (max-width:1000px){.shop-grid{grid-template-columns:repeat(2,1fr)}}
+@media (max-width:640px){.shop{padding:90px 16px 100px}.shop-title{font-size:19vw}.shop-grid{gap:10px;margin-top:36px}.shop-card h3{font-size:20px;padding:14px 14px 6px}.shop-card p{font-size:14px;padding:0 14px}.shop-price{padding:10px 14px 16px;font-size:17px}.shop-card-all{min-height:200px}.shop-card-all h3{font-size:26px;padding:16px 14px 6px}.shop-card-all p{padding:0 14px}.shop-card-all .shop-price{padding:10px 14px 16px}}
