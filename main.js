@@ -47,7 +47,7 @@ deal();
 
 // find your fit
 const fitText = {
-  youth: 'Our boys and girls 10U and 12U tournament teams are built for players who compete and want to keep climbing.',
+  youth: 'Our boys' 10U and 12U tournament teams are built for players who compete and want to keep climbing.',
   girls: "Our girls' tournament teams are forming at 12U, 14U and 16U.",
   heart: 'Heart Squad is our team for neurodivergent athletes and athletes with special needs, with coaching and games built around how they play best.',
 };
