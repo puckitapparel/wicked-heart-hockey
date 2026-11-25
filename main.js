@@ -47,13 +47,13 @@ deal();
 
 // find your fit
 const fitText = {
-  youth: "Our boys' 10U and 12U tournament teams are built for players who compete and want to keep climbing.",
+  youth: "Our boys' 10U, 12U and 14U tournament teams are built for players who compete and want to keep climbing.",
   girls: "Our girls' tournament teams are forming at 12U, 14U and 16U.",
   heart: 'Heart Squad is our team for neurodivergent athletes and athletes with special needs, with coaching and games built around how they play best.',
 };
 const table = document.querySelector('.lineup');
 const out = document.querySelector('.fit-result');
-const labels = { youth: ['10U team', '12U team'], girls: ['Girls 12U', 'Girls 14U', 'Girls 16U'], heart: ['Heart Squad'] };
+const labels = { youth: ['10U team', '12U team', '14U team'], girls: ['Girls 12U', 'Girls 14U', 'Girls 16U'], heart: ['Heart Squad'] };
 const form = document.getElementById('interest-form');
 // Google Sheet tracker (Apps Script web app). Leave blank to skip.
 const TRACKER_URL = 'https://script.google.com/macros/s/AKfycbyCmRARIfIqUL0Z_7hHulyCBwZpuKzhCICd0N3XLC61cIwwKAWIPL5g93rDye8cFOBY/exec';
