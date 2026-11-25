@@ -336,3 +336,28 @@ mark{color:#000;padding:0 .12em;-webkit-box-decoration-break:clone;box-decoratio
 .shop-card-all .shop-price{color:#000;padding:16px 24px 26px;text-decoration:underline}
 @media (max-width:1000px){.shop-grid{grid-template-columns:repeat(2,1fr)}}
 @media (max-width:640px){.shop{padding:90px 16px 100px}.shop-title{font-size:19vw}.shop-grid{gap:10px;margin-top:36px}.shop-card h3{font-size:20px;padding:14px 14px 6px}.shop-card p{font-size:14px;padding:0 14px}.shop-price{padding:10px 14px 16px;font-size:17px}.shop-card-all{min-height:200px}.shop-card-all h3{font-size:26px;padding:16px 14px 6px}.shop-card-all p{padding:0 14px}.shop-card-all .shop-price{padding:10px 14px 16px}}
+
+/* Girls 2027 schedule */
+.sched{background:var(--bg);padding:120px var(--m) 130px}
+.sched-kicker{display:inline-block;background:var(--cyan);color:#000;font-weight:800;letter-spacing:.08em;text-transform:uppercase;padding:8px 14px;font-size:16px}
+.sched-title{font-size:clamp(56px,8vw,128px);margin-top:18px;color:var(--ink)}
+.sched-grid{display:grid;grid-template-columns:1fr 1fr;gap:clamp(24px,3vw,48px);margin-top:56px}
+.sched-group{background:var(--raise);padding:clamp(16px,2vw,28px);display:flex;flex-direction:column;gap:22px}
+.sched-group img{width:100%;height:auto;display:block}
+.sched-ages{font-size:clamp(44px,4.6vw,76px);color:var(--ink)}
+.sched-ages span{color:var(--cyan)}
+.sched-group:nth-child(2) .sched-ages span{color:var(--gold)}
+.sched-list{list-style:none;margin:0;padding:0;display:grid;gap:10px}
+.sched-list li{display:grid;grid-template-columns:130px 1fr;column-gap:16px;padding:14px 0;border-top:1px solid #2a2535}
+.sd{grid-row:span 2;font-family:var(--display);text-transform:uppercase;font-size:26px;line-height:1.1;color:var(--cyan)}
+.sched-group:nth-child(2) .sd{color:var(--gold)}
+.sn{font-weight:700;font-size:20px;line-height:1.2}
+.sl{color:var(--soft);font-size:16px}
+.sched-cta{margin-top:48px}
+@media (max-width:820px){
+  .sched{padding:80px 16px 90px}
+  .sched-grid{grid-template-columns:1fr}
+  .sched-list li{grid-template-columns:104px 1fr}
+  .sd{font-size:22px}
+  .sched-cta{width:100%;text-align:center;padding:14px 20px;line-height:1.3}
+}
